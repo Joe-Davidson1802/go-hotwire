@@ -1,0 +1,14 @@
+{% package main %}
+{% import "strconv" %}
+
+{% templ rPerson(i int, p Person) %}
+<a href={%= "person/" + strconv.Itoa(i) %}>{%= "Select " + p.Name %}</a>
+{% endtempl %}
+
+{% templ renderPeople(pe []Person) %}
+	{% for i, p := range pe %}
+			{% call rPerson(i, p) %}
+	{% endfor %}
+{% endtempl %}
+
+
