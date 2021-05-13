@@ -1,7 +1,16 @@
 {% package main %}
 
 {% templ renderPerson(p Person) %}
-<div>{%= p.Name %}</div>
+<html>
+  <head>
+    <script src="scripts/turbo/turbo.es5-umd.js"></script>
+  </head>
+  <body>
+    <turbo-frame id="people">
+      <div>{%= p.Name %}</div>
+    </turbo-frame>
+  </body>
+</html>
 {% endtempl %}
 
 
