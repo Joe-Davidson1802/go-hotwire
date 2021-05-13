@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -86,6 +87,11 @@ func htmlMiddleware(next http.Handler) http.Handler {
 }
 
 func main() {
+	var port string
+
+	flag.StringVar(&port, "port", "80", "port to run the website on")
+	flag.Parse()
+
 	r := mux.NewRouter()
 	r.Use(htmlMiddleware)
 
@@ -95,6 +101,6 @@ func main() {
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("public")))
 
 	http.Handle("/", r)
-	fmt.Println("Listening")
-	http.ListenAndServe(":8082", nil)
+	fmt.Println("Listening on port:", port)
+	http.ListenAndServe(":"+port, nil)
 }
